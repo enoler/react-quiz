@@ -1,13 +1,17 @@
-.App-header {
+.Quiz-Container {
   background-size: cover;
   background-image: url('../../assets/background.jpg');
   min-height: 100vh;
+}
+
+.Quiz-Content {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height:85vh
 }
 
-.Content {
+.Quiz-Form {
   opacity: 0.9;
   filter: alpha(opacity=90);
   border-radius: 5px;
@@ -15,9 +19,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   width: 80vh;
-  height: 50vh;
+  padding: 25px;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Quiz-Element {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Nav-Item {
+  margin-right: 20px;
 }
