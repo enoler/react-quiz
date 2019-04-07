@@ -16,6 +16,9 @@ export default class NavBarComponent extends Component {
         </Navbar.Brand>
         <Navbar.Collapse className='justify-content-end'>
           <Navbar.Text className='Nav-Item'>
+            Time: {this.props.time}
+          </Navbar.Text>
+          <Navbar.Text className='Nav-Item'>
             High Score: {this.props.highScore}
           </Navbar.Text>
           <Navbar.Text className='Nav-Item'>
