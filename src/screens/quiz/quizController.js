@@ -2,6 +2,8 @@ import { Component } from 'react';
 import template from './quizView';
 import QuizService from './quizService';
 
+const MAX_ROUNDS = 5;
+
 class QuizController extends Component {
   constructor (args) {
     super(args);
@@ -15,15 +17,13 @@ class QuizController extends Component {
       score: 0,
       isPlaying: true,
       highScore: 0,
-      reward: 0,
-      buttonText: 'Submit'
+      reward: 0
     };
   }
 
   answerIsIncorrect () {
     this.setState({
       isPlaying: false,
-      buttonText: 'Reset',
       question: 'Game over'
     });
   }
@@ -42,29 +42,38 @@ class QuizController extends Component {
   }
 
   async getQuestion () {
-    let question;
-    do {
-      question = await this.quizService.getQuestion();
-    } while (question.id in this.questionsReceived);
-    this.questionsReceived[question.id] = question.id;
-    console.log(question.answer);
-    this.setState({
-      highScore: this.getHighScore(),
-      reward: Math.pow(2, this.state.round),
-      round: this.state.round + 1,
-      question: question.question,
-      questionCategory: question.category,
-      questionAnswer: question.answer,
-      score: this.state.round == 0 ? 0 : this.state.score + this.state.reward
-    });
+    if (this.state.round >= MAX_ROUNDS) {
+      this.setState({
+        isPlaying: false,
+        question: 'You won!',
+        score: this.state.score + this.state.reward,
+        highScore: this.getHighScore()
+
+      });
+    } else {
+      let question;
+      do {
+        question = await this.quizService.getQuestion();
+      } while (question.id in this.questionsReceived);
+      this.questionsReceived[question.id] = question.id;
+      console.log(question.answer);
+      this.setState({
+        highScore: this.getHighScore(),
+        reward: Math.pow(2, this.state.round),
+        round: this.state.round + 1,
+        question: question.question,
+        questionCategory: question.category,
+        questionAnswer: question.answer,
+        score: this.state.round == 0 ? 0 : this.state.score + this.state.reward
+      });
+    }
   }
 
-  reset () {
-    this.setState({
+  async reset () {
+    await this.setState({
       isPlaying: true,
       score: 0,
-      round: 0,
-      buttonText: 'Submit'
+      round: 0
     });
     this.getQuestion();
   }
