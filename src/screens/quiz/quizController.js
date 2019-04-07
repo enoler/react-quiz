@@ -39,7 +39,6 @@ class QuizController extends Component {
   }
 
   async changeSecond () {
-    console.log('interval');
     if (this.state.time != 0) this.setState({time: this.state.time - 1});
     else this.answerIsIncorrect();
   }
@@ -70,7 +69,7 @@ class QuizController extends Component {
       let question;
       do {
         question = await this.quizService.getQuestion();
-      } while (question.id in this.questionsReceived);
+      } while (question.id in this.questionsReceived || !question.question);
       this.questionsReceived[question.id] = question.id;
       console.log(question.answer);
       this.setState({
