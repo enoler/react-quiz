@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
 
 export default class NavBarComponent extends Component {
-  onChange (event) {
-    const inputAnswer = parseInt(event.currentTarget.value);
-    console.log(inputAnswer);
-  }
-
   render () {
     return (
       <Navbar bg='primary' variant='light'>
@@ -21,7 +16,10 @@ export default class NavBarComponent extends Component {
         </Navbar.Brand>
         <Navbar.Collapse className='justify-content-end'>
           <Navbar.Text className='Nav-Item'>
-          Round: {this.props.round}
+            High Score: {this.props.highScore}
+          </Navbar.Text>
+          <Navbar.Text className='Nav-Item'>
+            Round: {this.props.round}
           </Navbar.Text>
           <Navbar.Text>
             Score: {this.props.score}
