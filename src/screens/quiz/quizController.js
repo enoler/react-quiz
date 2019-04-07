@@ -12,13 +12,33 @@ class QuizController extends Component {
       questionCategory: '',
       questionAnswer: '',
       round: 0,
-      score: 0
+      score: 0,
+      isPlaying: true,
+      highScore: 0,
+      reward: 0,
+      buttonText: 'Submit'
     };
   }
 
-  answerIsCorrect () {
-    this.incrementScore();
-    this.getQuestion();
+  answerIsIncorrect () {
+    this.setState({
+      isPlaying: false,
+      buttonText: 'Reset',
+      question: 'Game over'
+    });
+  }
+
+  getClickButton (answer) {
+    if (this.state.isPlaying) this.submitAnswer(answer);
+    else this.reset();
+  }
+
+  getHighScore () {
+    if (!this.state.highScore && this.state.round == 0) return 0;
+    else {
+      return this.state.score >= this.state.highScore ?
+      this.state.score + this.state.reward : this.state.highScore;
+    }
   }
 
   async getQuestion () {
@@ -29,23 +49,31 @@ class QuizController extends Component {
     this.questionsReceived[question.id] = question.id;
     console.log(question.answer);
     this.setState({
+      highScore: this.getHighScore(),
       reward: Math.pow(2, this.state.round),
       round: this.state.round + 1,
       question: question.question,
       questionCategory: question.category,
-      questionAnswer: question.answer
+      questionAnswer: question.answer,
+      score: this.state.round == 0 ? 0 : this.state.score + this.state.reward
     });
   }
 
-  incrementScore () {
+  reset () {
     this.setState({
-      score: this.state.score + this.state.reward
+      isPlaying: true,
+      score: 0,
+      round: 0,
+      buttonText: 'Submit'
     });
+    this.getQuestion();
   }
 
   submitAnswer (answer) {
     if (answer == this.state.questionAnswer) {
-      this.answerIsCorrect();
+      this.getQuestion();
+    } else {
+      this.answerIsIncorrect();
     }
   }
 
