@@ -23,7 +23,17 @@ export default class FormComponent extends Component {
         <h1>Quiz</h1>
         <Form.Group controlId='formInputInteger'>
           <Form.Label className='Quiz-Element'>{this.props.question}</Form.Label>
-          <Badge variant='primary' className='Quiz-Element'>{this.props.category}</Badge>
+          <Badge
+            style={{ marginRight: 20 }}
+            variant='secondary'
+            className='Quiz-Element'>
+            {this.props.category}
+          </Badge>
+          <Badge
+            variant='info'
+            className='Quiz-Element'>{
+            this.props.reward} {this.props.reward === 1 ? 'point' : 'points'}
+          </Badge>
           <Form.Control
             className='Quiz-Element'
             size='lg'
@@ -31,7 +41,7 @@ export default class FormComponent extends Component {
             placeholder='Answer'
             onChange={(event) => this.onChange(event)} />
         </Form.Group>
-        <Button variant='secondary'
+        <Button variant='primary'
           onClick={() => this.props.onClick(this.state.answer)}>Submit</Button>
       </Form>
     );

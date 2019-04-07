@@ -20,8 +20,11 @@ export default class NavBarComponent extends Component {
           {'React Quiz'}
         </Navbar.Brand>
         <Navbar.Collapse className='justify-content-end'>
+          <Navbar.Text className='Nav-Item'>
+          Round: {this.props.round}
+          </Navbar.Text>
           <Navbar.Text>
-            Round: <a href='#login'>{this.props.round}</a>
+            Score: {this.props.score}
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
