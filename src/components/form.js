@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default class FormComponent extends Component {
+export default class NavBarComponent extends Component {
   constructor (args) {
     super(args);
-    this.state = {
-      result: null
-    };
-  }
-
-  onChange (event) {
-    const inputAnswer = parseInt(event.currentTarget.value);
-    console.log(inputAnswer);
   }
 
   render () {
