@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
 
 export default class NavBarComponent extends Component {
-  constructor (args) {
-    super(args);
-  }
-
   onChange (event) {
     const inputAnswer = parseInt(event.currentTarget.value);
     console.log(inputAnswer);
