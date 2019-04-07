@@ -8,6 +8,10 @@ class QuizController extends Component {
     this.quizService = new QuizService();
   }
 
+  componentDidMount () {
+    this.quizService.getQuestion();
+  }
+
   render () {
     return template(this);
   }
