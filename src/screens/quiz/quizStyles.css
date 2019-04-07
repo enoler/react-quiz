@@ -1,0 +1,23 @@
+.App-header {
+  background-size: cover;
+  background-image: url('../../assets/background.jpg');
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Content {
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  border-radius: 5px;
+  background-color: #282c34;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 80vh;
+  height: 50vh;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
