@@ -23,7 +23,7 @@ class QuizController extends Component {
     this.setState({
       round: this.state.round + 1,
       question: question.question,
-      questionCategory: question.category.title,
+      questionCategory: question.category,
       questionAnswer: question.answer
     });
   }
