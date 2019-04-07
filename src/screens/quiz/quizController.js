@@ -2,13 +2,15 @@ import { Component } from 'react';
 import template from './quizView';
 import QuizService from './quizService';
 
-const MAX_ROUNDS = 5;
+const MAX_ROUNDS = 30;
+const TIME_LIMIT = 30;
 
 class QuizController extends Component {
   constructor (args) {
     super(args);
     this.quizService = new QuizService();
     this.questionsReceived = {};
+    this.chronometerId = 0;
     this.state = {
       question: '',
       questionCategory: '',
@@ -17,15 +19,29 @@ class QuizController extends Component {
       score: 0,
       isPlaying: true,
       highScore: 0,
-      reward: 0
+      reward: 0,
+      time: TIME_LIMIT
     };
   }
 
+  answerIsCorrect () {
+    clearInterval(this.chronometerId);
+    this.getQuestion();
+    this.startChronometer();
+  }
+
   answerIsIncorrect () {
+    clearInterval(this.chronometerId);
     this.setState({
       isPlaying: false,
       question: 'Game over'
     });
+  }
+
+  async changeSecond () {
+    console.log('interval');
+    if (this.state.time != 0) this.setState({time: this.state.time - 1});
+    else this.answerIsIncorrect();
   }
 
   getClickButton (answer) {
@@ -64,7 +80,7 @@ class QuizController extends Component {
         question: question.question,
         questionCategory: question.category,
         questionAnswer: question.answer,
-        score: this.state.round == 0 ? 0 : this.state.score + this.state.reward
+        score: this.state.round === 0 ? 0 : this.state.score + this.state.reward
       });
     }
   }
@@ -73,21 +89,29 @@ class QuizController extends Component {
     await this.setState({
       isPlaying: true,
       score: 0,
-      round: 0
+      round: 0,
+      time: TIME_LIMIT
     });
     this.getQuestion();
+    this.startChronometer();
   }
 
   submitAnswer (answer) {
-    if (answer == this.state.questionAnswer) {
-      this.getQuestion();
+    if (answer === this.state.questionAnswer) {
+      this.answerIsCorrect();
     } else {
       this.answerIsIncorrect();
     }
   }
 
+  async startChronometer () {
+    this.setState({time: 30});
+    this.chronometerId = setInterval(() => this.changeSecond(), 1000);
+  }
+
   componentDidMount () {
     this.getQuestion();
+    this.startChronometer();
   }
 
   render () {

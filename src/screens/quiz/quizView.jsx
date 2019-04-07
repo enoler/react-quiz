@@ -9,7 +9,8 @@ export default (controller) => (
     <NavBar
       round={controller.state.round}
       score={controller.state.score}
-      highScore={controller.state.highScore} />
+      highScore={controller.state.highScore}
+      time={controller.state.time} />
     <div className='Quiz-Content'>
       <div className='Quiz-Form'>
         <Form
