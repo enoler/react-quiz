@@ -6,21 +6,30 @@ class QuizController extends Component {
   constructor (args) {
     super(args);
     this.quizService = new QuizService();
+    this.questionsReceived = {};
     this.state = {
       question: '',
       questionCategory: '',
       questionAnswer: '',
-      round: 0
+      round: 0,
+      score: 0
     };
   }
 
-  componentDidMount () {
+  answerIsCorrect () {
+    this.incrementScore();
     this.getQuestion();
   }
 
   async getQuestion () {
-    const question = await this.quizService.getQuestion();
+    let question;
+    do {
+      question = await this.quizService.getQuestion();
+    } while (question.id in this.questionsReceived);
+    this.questionsReceived[question.id] = question.id;
+    console.log(question.answer);
     this.setState({
+      reward: Math.pow(2, this.state.round),
       round: this.state.round + 1,
       question: question.question,
       questionCategory: question.category,
@@ -28,8 +37,20 @@ class QuizController extends Component {
     });
   }
 
+  incrementScore () {
+    this.setState({
+      score: this.state.score + this.state.reward
+    });
+  }
+
   submitAnswer (answer) {
-    console.log(answer, this.state.questionAnswer);
+    if (answer == this.state.questionAnswer) {
+      this.answerIsCorrect();
+    }
+  }
+
+  componentDidMount () {
+    this.getQuestion();
   }
 
   render () {
