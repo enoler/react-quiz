@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
+import {
+  Form,
+  Badge
+} from 'react-bootstrap';
 
 export default class NavBarComponent extends Component {
   render () {
@@ -7,8 +10,10 @@ export default class NavBarComponent extends Component {
       <Form>
         <h1>Quiz</h1>
         <Form.Group controlId='formInputInteger'>
-          <Form.Label>Please, answer the question:</Form.Label>
+          <Form.Label className='Quiz-Element'>{this.props.question}</Form.Label>
+          <Badge variant='primary' className='Quiz-Element'>{this.props.category}</Badge>
           <Form.Control
+            className='Quiz-Element'
             size='lg'
             type='text'
             placeholder='Answer'

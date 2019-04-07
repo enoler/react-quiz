@@ -6,10 +6,13 @@ import './quizStyles.css';
 
 export default (controller) => (
   <div className='Quiz-Container'>
-    <NavBar />
+    <NavBar
+      round={controller.state.round} />
     <div className='Quiz-Content'>
       <div className='Quiz-Form'>
         <Form
+          question={controller.state.question}
+          category={controller.state.questionCategory}
           onChange={(answer) => controller.log(answer)} />
       </div>
     </div>

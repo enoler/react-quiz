@@ -21,6 +21,12 @@
   align-items: center;
   width: 80vh;
   height: 50vh;
+  padding: 25px;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Quiz-Element {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

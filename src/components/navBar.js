@@ -9,7 +9,7 @@ export default class NavBarComponent extends Component {
 
   render () {
     return (
-      <Navbar bg='dark' variant='dark'>
+      <Navbar bg='primary' variant='light'>
         <Navbar.Brand href='#home'>
           <img
             alt=''
@@ -21,7 +21,7 @@ export default class NavBarComponent extends Component {
         </Navbar.Brand>
         <Navbar.Collapse className='justify-content-end'>
           <Navbar.Text>
-            Round: <a href='#login'>0</a>
+            Round: <a href='#login'>{this.props.round}</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
