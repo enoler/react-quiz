@@ -28,6 +28,10 @@ class QuizController extends Component {
     });
   }
 
+  submitAnswer (answer) {
+    console.log(answer, this.state.questionAnswer);
+  }
+
   render () {
     return template(this);
   }

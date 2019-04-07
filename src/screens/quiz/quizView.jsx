@@ -13,7 +13,7 @@ export default (controller) => (
         <Form
           question={controller.state.question}
           category={controller.state.questionCategory}
-          onChange={(answer) => controller.log(answer)} />
+          onClick={(answer) => controller.submitAnswer(answer)} />
       </div>
     </div>
   </div>

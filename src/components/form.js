@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import {
   Form,
-  Badge
+  Badge,
+  Button
 } from 'react-bootstrap';
 
-export default class NavBarComponent extends Component {
+export default class FormComponent extends Component {
+  constructor (args) {
+    super(args);
+    this.state = {
+      answer: null
+    };
+  }
+
+  onChange (event) {
+    this.setState({ answer: event.currentTarget.value.toUpperCase() });
+  }
+
   render () {
     return (
       <Form>
@@ -19,6 +31,8 @@ export default class NavBarComponent extends Component {
             placeholder='Answer'
             onChange={(event) => this.onChange(event)} />
         </Form.Group>
+        <Button variant='secondary'
+          onClick={() => this.props.onClick(this.state.answer)}>Submit</Button>
       </Form>
     );
   }

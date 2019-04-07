@@ -8,7 +8,7 @@ export default class QuizService {
       id: question.data[0].id,
       question: question.data[0].question,
       category: question.data[0].category.title,
-      answer: question.data[0].answer
+      answer: question.data[0].answer.toUpperCase()
     };
   }
 }
