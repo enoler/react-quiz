@@ -56,7 +56,7 @@ export default class FormComponent extends Component {
           {this.props.isPlaying ? this.getQuestionContent() : <div />}
         </Form.Group>
         <Button variant='primary'
-          onClick={() => this.onClick()}>{ this.props.buttonText }</Button>
+          onClick={() => this.onClick()}>{ this.props.isPlaying ? 'Submit' : 'Reset' }</Button>
       </Form>
     );
   }
